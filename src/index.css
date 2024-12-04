@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+a.active {
+  border-radius: 0;
+  background: #4a00ff !important;
+}
+
+.slick-slide > div {
+  margin: 0px 10px;
+}
