@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Outlet } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const HomeLayout = () => {
   return (
@@ -12,6 +13,9 @@ const HomeLayout = () => {
       </div>
       <div className="w-11/12 mx-auto">
         <Outlet></Outlet>
+      </div>
+      <div>
+        <Footer></Footer>
       </div>
       <ToastContainer />
     </div>

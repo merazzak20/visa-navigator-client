@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const Navbar = () => {
+  const [isHovered, setIsHovered] = useState(false);
   const { user, userSignOut } = useContext(AuthContext);
   const handleSignOut = () => {
     userSignOut()
@@ -63,14 +64,30 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end space-x-2">
-        <div className=" ">
+        <div className=" relative">
           {user && user?.photoURL ? (
-            <div>
+            <div
+              className="relative group  text-right"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
               <img
                 className="w-12 h-12 rounded-full object-cover"
                 src={user?.photoURL}
                 alt=""
               />
+              {/* {user.photoURL} */}
+              {isHovered && (
+                <div className="absolute inset-2  bg-opacity-50 flex flex-col justify-center items-center rounded-full mt-6 -bottom-20 ">
+                  <button
+                    onClick={handleSignOut}
+                    className="btn btn-primary rounded-none"
+                  >
+                    Logout
+                  </button>
+                  <p className="text-red mt-2 font-bold">{user?.displayName}</p>
+                </div>
+              )}
             </div>
           ) : (
             ""
@@ -78,12 +95,7 @@ const Navbar = () => {
         </div>
         <div>
           {user ? (
-            <button
-              onClick={handleSignOut}
-              className="btn btn-primary rounded-none"
-            >
-              Logout
-            </button>
+            ""
           ) : (
             <div className=" space-x-2">
               <Link to="/login" className="btn btn-primary rounded-none">
