@@ -7,6 +7,7 @@ import Home from "../pages/Home";
 import Allvisas from "../pages/Allvisas";
 import Addvisas from "../pages/Addvisas";
 import Application from "../pages/Application";
+import Error from "../pages/Error";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         element: <Register></Register>,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <Error></Error>,
   },
 ]);
 
