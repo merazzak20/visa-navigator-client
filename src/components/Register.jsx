@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle } from "react-icons/fa";
-import { AuthContext } from "../provider/AuthProvider";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Register = () => {
   const {
@@ -49,10 +49,11 @@ const Register = () => {
   };
 
   const handleGoogleSignIn = () => {
+    console.log(2);
     googleSignIn()
       .then((res) => {
         setUser(res.user);
-        // console.log(res.user);
+        console.log(res.user);
         updateUserProfile({ dispalyName: displayName, photoURL: photoURL })
           .then(() => {
             navigate("/");
