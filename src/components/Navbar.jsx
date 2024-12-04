@@ -63,7 +63,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end space-x-2">
-        {/* <div className=" ">
+        <div className=" ">
           {user && user?.photoURL ? (
             <div>
               <img
@@ -75,7 +75,7 @@ const Navbar = () => {
           ) : (
             ""
           )}
-        </div> */}
+        </div>
         <div>
           {user ? (
             <button
