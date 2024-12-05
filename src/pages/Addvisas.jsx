@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
 
 const Addvisas = () => {
@@ -86,6 +87,11 @@ const Addvisas = () => {
 
   return (
     <div className="lg:w-3/4 mx-auto">
+      <Helmet>
+        <title>Add Visa - VisaNavigator</title>
+        <meta name="description" content="Learn more about our company." />
+        <meta name="keywords" content="about, company, information" />
+      </Helmet>
       <div className="text-center p-10">
         <h1 className="text-5xl font-bold">Add Visa</h1>
       </div>
