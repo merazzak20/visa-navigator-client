@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 const VisaDetail = () => {
+  const { user } = useContext(AuthContext);
   const visa = useLoaderData();
 
   const {
@@ -75,10 +77,6 @@ const VisaDetail = () => {
       {/* Modal */}
       <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-          <h3 className="font-bold text-lg">Hello!</h3>
-          <p className="py-4">
-            Press ESC key or click the button below to close
-          </p>
           <form className="space-y-4">
             <div>
               <label
@@ -119,6 +117,7 @@ const VisaDetail = () => {
                 id="email"
                 type="email"
                 placeholder="email"
+                defaultValue={user?.email}
                 className="input input-bordered w-full"
               />
             </div>
