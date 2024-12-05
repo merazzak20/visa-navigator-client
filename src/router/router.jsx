@@ -17,10 +17,12 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+        loader: () => fetch(`http://localhost:5000/visas`),
       },
       {
         path: "/allvisas",
         element: <Allvisas></Allvisas>,
+        loader: () => fetch(`http://localhost:5000/visas`),
       },
       {
         path: "/addvisas",

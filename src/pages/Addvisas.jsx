@@ -35,30 +35,42 @@ const Addvisas = () => {
   const handleAddVisa = (e) => {
     e.preventDefault();
 
-    const name = e.target.name.value;
-    const chef = e.target.chef.value;
-    const supplier = e.target.supplier.value;
-    const taste = e.target.taste.value;
-    const category = e.target.category.value;
-    const details = e.target.details.value;
-    const photo = e.target.photo.value;
+    const countryImage = e.target.countryImage.value;
+    const countryName = e.target.countryName.value;
+    const visaType = e.target.visaType.value;
+    const processingTime = e.target.processingTime.value;
+    const requiredDocuments = e.target.requiredDocuments.value;
+    const ageRestriction = e.target.ageRestriction.value;
+    const fee = e.target.fee.value;
+    const validity = e.target.validity.value;
+    const applicationMethod = e.target.applicationMethod.value;
+    const description = e.target.description.value;
 
-    const newCoffee = { name, chef, supplier, taste, category, details, photo };
-    console.log(newCoffee);
+    const newVisa = {
+      countryImage,
+      countryName,
+      visaType,
+      processingTime,
+      requiredDocuments,
+      ageRestriction,
+      fee,
+      validity,
+      applicationMethod,
+      description,
+    };
+    console.log(newVisa);
 
     // send data to the server and database
-    fetch(
-      "https://coffee-store-server-qdrgu4ecz-merazzak20s-projects.vercel.app/coffee",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(newCoffee),
-      }
-    )
+    fetch("http://localhost:5000/visas", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newVisa),
+    })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.insertedId) {
           console.log("successfully added");
           Swal.fire({
