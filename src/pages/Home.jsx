@@ -3,6 +3,7 @@ import CaruselSlider from "../components/CaruselSlider";
 import VisaSection from "../components/VisaSection";
 import { useLoaderData } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import FAQ from "../components/FAQ";
 
 const Home = () => {
   const visas = useLoaderData();
@@ -19,6 +20,9 @@ const Home = () => {
       </div>
       <div className="my-5">
         <VisaSection visas={visas}></VisaSection>
+      </div>
+      <div className="my-7">
+        <FAQ></FAQ>
       </div>
     </div>
   );
