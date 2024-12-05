@@ -1,25 +1,8 @@
 import React from "react";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 
-const Visa = ({ visa }) => {
-  const {
-    countryImage,
-    countryName,
-    visaType,
-    processingTime,
-    fee,
-    validity,
-    applicationMethod,
-  } = visa;
-  //     Country.
-  // Country image.
-  // Visa_type.
-  // Processing_time.
-  // Fee.
-  // Validity.
-  // Application_method.
-  // “See Details” button.
-
+const AllVisasVisa = ({ visa }) => {
+  const { countryImage, countryName, visaType, processingTime, fee } = visa;
   return (
     <div className="card bg-base-100  shadow-xl">
       <figure>
@@ -40,15 +23,6 @@ const Visa = ({ visa }) => {
           <p className="font-medium text-gray-600">
             Fee: {fee ? <span>{fee}</span> : <span>0</span>} Taka
           </p>
-          <p className="font-medium text-gray-600">Validity: {validity}</p>
-          <p className="font-medium text-gray-600">
-            Applicatin Method:{" "}
-            {applicationMethod ? (
-              <span>{applicationMethod}</span>
-            ) : (
-              <span>N/A</span>
-            )}
-          </p>
         </div>
 
         <div className="card-actions justify-end">
@@ -61,4 +35,4 @@ const Visa = ({ visa }) => {
   );
 };
 
-export default Visa;
+export default AllVisasVisa;

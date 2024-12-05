@@ -16,7 +16,7 @@ const Home = () => {
         <meta name="description" content="Learn more about our company." />
         <meta name="keywords" content="about, company, information" />
       </Helmet>
-      <div className="mb-14">
+      <div className="">
         <CaruselSlider></CaruselSlider>
       </div>
       <div>
