@@ -85,7 +85,9 @@ const Navbar = () => {
                   >
                     Logout
                   </button>
-                  <p className="text-red mt-2 font-bold">{user?.displayName}</p>
+                  <p className="text-red mt-2 font-bold z-20">
+                    {user?.displayName}
+                  </p>
                 </div>
               )}
             </div>

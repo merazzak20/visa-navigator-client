@@ -4,33 +4,29 @@ import Swal from "sweetalert2";
 
 const Addvisas = () => {
   const [formData, setFormData] = useState({
-    countryImage: "",
-    countryName: "",
-    visaType: "",
-    processingTime: "",
     requiredDocuments: [],
-    description: "",
-    ageRestriction: "",
-    fee: "",
-    validity: "",
-    applicationMethod: "",
   });
+  console.log(formData);
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    if (type === "checkbox") {
-      setFormData((prevData) => ({
-        ...prevData,
-        requiredDocuments: checked
-          ? [...prevData.requiredDocuments, value]
-          : prevData.requiredDocuments.filter((doc) => doc !== value),
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
+  const handleChange = (event) => {
+    const { value, checked } = event.target;
+    setFormData((prevData) => {
+      if (checked) {
+        // Add the document if checked
+        return {
+          ...prevData,
+          requiredDocuments: [...prevData.requiredDocuments, value],
+        };
+      } else {
+        // Remove the document if unchecked
+        return {
+          ...prevData,
+          requiredDocuments: prevData.requiredDocuments.filter(
+            (doc) => doc !== value
+          ),
+        };
+      }
+    });
   };
 
   const handleAddVisa = (e) => {
@@ -40,12 +36,14 @@ const Addvisas = () => {
     const countryName = e.target.countryName.value;
     const visaType = e.target.visaType.value;
     const processingTime = e.target.processingTime.value;
-    const requiredDocuments = e.target.requiredDocuments.value;
+    const requiredDocuments = e.target.requiredDocuments;
     const ageRestriction = e.target.ageRestriction.value;
     const fee = e.target.fee.value;
     const validity = e.target.validity.value;
     const applicationMethod = e.target.applicationMethod.value;
     const description = e.target.description.value;
+
+    // console.log(requiredDocuments);
 
     const newVisa = {
       countryImage,
@@ -198,7 +196,6 @@ const Addvisas = () => {
                     id={doc}
                     name="requiredDocuments"
                     value={doc}
-                    checked={formData.requiredDocuments.includes(doc)}
                     onChange={handleChange}
                     className="mr-2"
                   />
