@@ -1,6 +1,5 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
-import Visa from "../components/Visa";
 import { Helmet } from "react-helmet";
 import AllVisasVisa from "../components/AllVisasVisa";
 

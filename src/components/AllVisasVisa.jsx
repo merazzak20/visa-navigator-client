@@ -1,8 +1,18 @@
 import React from "react";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const AllVisasVisa = ({ visa }) => {
-  const { countryImage, countryName, visaType, processingTime, fee } = visa;
+  const { _id, countryImage, countryName, visaType, processingTime, fee } =
+    visa;
+
+  const navigate = useNavigate();
+
+  const handleDetails = (_id) => {
+    console.log(_id);
+    navigate(`/allvisas/${_id}`);
+  };
+
   return (
     <div className="card bg-base-100  shadow-xl">
       <figure>
@@ -26,7 +36,10 @@ const AllVisasVisa = ({ visa }) => {
         </div>
 
         <div className="card-actions justify-end">
-          <button className="btn btn-outline btn-primary ">
+          <button
+            onClick={() => handleDetails(_id)}
+            className="btn btn-outline btn-primary "
+          >
             See Details <MdOutlineKeyboardDoubleArrowRight />
           </button>
         </div>
