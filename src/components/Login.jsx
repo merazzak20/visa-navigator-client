@@ -17,23 +17,6 @@ const Login = () => {
       .then((res) => {
         toast.success("Welcome" + " " + res.user.email);
         navigate(location?.state ? location.state : "/");
-        fetch(
-          "https://coffee-store-server-qdrgu4ecz-merazzak20s-projects.vercel.app/users",
-          {
-            method: "post",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(newUser),
-          }
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            console.log("created user", data);
-            if (data.insertedId) {
-              alert("user created in DB");
-            }
-          });
       })
       .catch((err) => {
         toast.error(err.message);
