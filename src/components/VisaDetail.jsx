@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 const VisaDetail = () => {
   const { user } = useContext(AuthContext);
@@ -63,15 +65,21 @@ const VisaDetail = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // if (data.insertedId) {
-        //   console.log("successfully added");
-        //   toast.success("successfully added");
-        // }
+        document.getElementById("my_modal_5").close();
+        if (data.insertedId) {
+          console.log("successfully added");
+          toast.success("successfully added");
+        }
       });
   };
 
   return (
     <div>
+      <Helmet>
+        <title>Visa Details - VisaNavigator</title>
+        <meta name="description" content="Learn more about our company." />
+        <meta name="keywords" content="about, company, information" />
+      </Helmet>
       <div>
         <h2 className="text-center text-3xl font-bold my-5">Visa Details</h2>
       </div>
@@ -126,9 +134,9 @@ const VisaDetail = () => {
       </div>
 
       {/* Modal */}
-      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
-          <form onSubmit={handleApply} className="space-y-4">
+      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle ">
+        <div className="modal-box ">
+          <form onSubmit={handleApply} className="space-y-4 ">
             <div>
               <label
                 className="block text-gray-700 font-medium mb-1"
@@ -208,18 +216,15 @@ const VisaDetail = () => {
                 className="input input-bordered w-full"
               />
             </div>
-            <button
-              type="submit"
-              className="btn btn-primary w-full rounded-none text-white "
-            >
-              Apply
-            </button>
+            <div className="modal-action mt-4">
+              <button
+                type="submit"
+                className="btn btn-primary w-full rounded-none text-white "
+              >
+                Apply
+              </button>
+            </div>
           </form>
-          <div className="modal-action mt-4">
-            <form method="dialog">
-              <button className="btn">Close</button>
-            </form>
-          </div>
         </div>
       </dialog>
     </div>

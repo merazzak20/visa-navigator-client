@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Addvisas = () => {
   const [formData, setFormData] = useState([]);
+  const { user } = useContext(AuthContext);
 
   const handleChange = (e) => {
     const newvisa = e.target.value;
@@ -30,6 +32,7 @@ const Addvisas = () => {
     const validity = e.target.validity.value;
     const applicationMethod = e.target.applicationMethod.value;
     const description = e.target.description.value;
+    const email = user.email;
 
     // console.log(requiredDocuments);
 
@@ -44,6 +47,7 @@ const Addvisas = () => {
       validity,
       applicationMethod,
       description,
+      email,
     };
     console.log(newVisa);
 
