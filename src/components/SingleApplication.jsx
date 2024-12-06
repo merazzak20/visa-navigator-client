@@ -1,8 +1,46 @@
 import React from "react";
+import Swal from "sweetalert2";
 
-const SingleApplication = ({ app }) => {
-  const { email, fName, lName, date, visa } = app;
-  console.log(app);
+const SingleApplication = ({
+  app,
+  loadedApplications,
+  setLoadedApplications,
+}) => {
+  const { _id, email, fName, lName, date, visa } = app;
+  const handleCancel = (_id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/applications/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            // console.log(data);
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success",
+              });
+
+              // update the loaded coffee state
+              const remainingApplication = loadedApplications.filter(
+                (app) => app._id !== _id
+              );
+              setLoadedApplications(remainingApplication);
+            }
+          });
+      }
+    });
+  };
   return (
     <div>
       <div className="card bg-base-100 mx-auto shadow-xl">
@@ -47,7 +85,12 @@ const SingleApplication = ({ app }) => {
           </div>
 
           <div className="card-actions justify-end">
-            <button className="btn btn-outline btn-primary ">Cancel</button>
+            <button
+              onClick={() => handleCancel(_id)}
+              className="btn btn-outline btn-primary "
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </div>
