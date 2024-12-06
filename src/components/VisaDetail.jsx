@@ -1,10 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 
 const VisaDetail = () => {
   const { user } = useContext(AuthContext);
   const visa = useLoaderData();
+
+  const getCurrentDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const [selectedDate, setSelectedDate] = useState(getCurrentDate());
+  // Handle change in the date input
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const handleApply = (e) => {
+    e.preventDefault();
+  };
 
   const {
     countryImage,
@@ -77,35 +95,7 @@ const VisaDetail = () => {
       {/* Modal */}
       <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-          <form className="space-y-4">
-            <div>
-              <label
-                className="block text-gray-700 font-medium mb-1"
-                htmlFor="name"
-              >
-                Name
-              </label>
-              <input
-                id="name"
-                type="text"
-                placeholder="name"
-                className="input input-bordered w-full"
-              />
-            </div>
-            <div>
-              <label
-                className="block text-gray-700 font-medium mb-1"
-                htmlFor="photo-url"
-              >
-                Photo URL
-              </label>
-              <input
-                id="photo-url"
-                type="text"
-                placeholder="photo url"
-                className="input input-bordered w-full"
-              />
-            </div>
+          <form onSubmit={handleApply} className="space-y-4">
             <div>
               <label
                 className="block text-gray-700 font-medium mb-1"
@@ -124,20 +114,61 @@ const VisaDetail = () => {
             <div>
               <label
                 className="block text-gray-700 font-medium mb-1"
-                htmlFor="password"
+                htmlFor="firstName"
               >
-                Password
+                First Name
               </label>
               <input
-                id="password"
-                type="password"
-                placeholder="password"
+                id="firstName"
+                type="text"
+                placeholder="First Name"
                 className="input input-bordered w-full"
               />
-              <p className="text-sm text-gray-500 mt-1">
-                Password must contain at least one uppercase, one lowercase
-                letter, and be at least 6 characters.
-              </p>
+            </div>
+            <div>
+              <label
+                className="block text-gray-700 font-medium mb-1"
+                htmlFor="lastName"
+              >
+                Last Name
+              </label>
+              <input
+                id="lastName"
+                type="text"
+                placeholder="Last Name"
+                className="input input-bordered w-full"
+              />
+            </div>
+            <div>
+              <label
+                className="block text-gray-700 font-medium mb-1"
+                htmlFor="date"
+              >
+                Date
+              </label>
+              <input
+                id="dateInput"
+                type="date"
+                value={selectedDate}
+                onChange={handleDateChange}
+                className="border rounded px-4 py-2"
+              />
+            </div>
+
+            <div>
+              <label
+                className="block text-gray-700 font-medium mb-1"
+                htmlFor="fee"
+              >
+                Fee
+              </label>
+              <input
+                id="fee"
+                type="text"
+                placeholder="password"
+                defaultValue={fee}
+                className="input input-bordered w-full"
+              />
             </div>
             <button
               type="submit"

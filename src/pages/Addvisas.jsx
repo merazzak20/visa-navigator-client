@@ -6,7 +6,17 @@ const Addvisas = () => {
   const [formData, setFormData] = useState({
     requiredDocuments: [],
   });
-  console.log(formData);
+
+  // const handleChange = (e) => {
+  //   const newvisa = e.target.value;
+  //   if (e.target.checked) {
+  //     setFormData((previsa) => [...previsa, newvisa]);
+  //   } else {
+  //     setFormData((previsa) =>
+  //       previsa.filter((formData) => formData !== newvisa)
+  //     );
+  //   }
+  // };
 
   const handleChange = (event) => {
     const { value, checked } = event.target;
@@ -28,6 +38,7 @@ const Addvisas = () => {
       }
     });
   };
+  console.log(formData);
 
   const handleAddVisa = (e) => {
     e.preventDefault();
@@ -36,7 +47,7 @@ const Addvisas = () => {
     const countryName = e.target.countryName.value;
     const visaType = e.target.visaType.value;
     const processingTime = e.target.processingTime.value;
-    const requiredDocuments = e.target.requiredDocuments;
+    const requiredDocuments = e.target.requiredDocuments.value;
     const ageRestriction = e.target.ageRestriction.value;
     const fee = e.target.fee.value;
     const validity = e.target.validity.value;
