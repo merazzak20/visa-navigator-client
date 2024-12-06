@@ -18,7 +18,7 @@ const MyVisa = ({ visa }) => {
     validity,
     applicationMethod,
   } = loadedVisa;
-  console.log(loadedVisa);
+  // console.log(loadedVisa);
   const handleDelete = (_id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -65,7 +65,7 @@ const MyVisa = ({ visa }) => {
 
   const handleUpdate = (e, _id) => {
     e.preventDefault();
-    console.log(_id);
+    // console.log(_id);
 
     const countryImage = e.target.countryImage.value;
     const countryName = e.target.countryName.value;
@@ -90,7 +90,7 @@ const MyVisa = ({ visa }) => {
       applicationMethod,
       description,
     };
-    console.log(updateVisa);
+    // console.log(updateVisa);
 
     // send data to the server and database
     fetch(`http://localhost:5000/visas/${_id}`, {
@@ -103,9 +103,9 @@ const MyVisa = ({ visa }) => {
       .then((res) => res.json())
       .then((data) => {
         document.getElementById("my_modal_5").close();
-        console.log(data);
+        // console.log(data);
         if (data.modifiedCount) {
-          console.log("successfully updated");
+          // console.log("successfully updated");
           Swal.fire({
             title: "Success!",
             text: "Visa updated successfully",

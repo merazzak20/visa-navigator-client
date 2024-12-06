@@ -7,7 +7,7 @@ import { AuthContext } from "../provider/AuthProvider";
 const Application = () => {
   const { user } = useContext(AuthContext);
   const { applications } = useLoaderData();
-  console.log(applications);
+  // console.log(applications);
   const [loadedApplications, setLoadedApplications] = useState(applications);
 
   const userApplications = applications.filter(

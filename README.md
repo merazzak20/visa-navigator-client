@@ -32,4 +32,4 @@ Let me know if you'd like to tweak it further! 😊
 
 ## Live Link -
 
-- **Example:** [https://wordtrail.com](https://b10-a9-db4e4.web.app/)
+- **Example:** [https://visanavigator.com](https://assignment-10-6510b.web.app/)

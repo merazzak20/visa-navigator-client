@@ -44,7 +44,7 @@ const VisaDetail = () => {
     const lName = form.lastName.value;
     const date = form.date.value;
     const fee = form.fee.value;
-    console.log(email, fName, lName, date, fee);
+    // console.log(email, fName, lName, date, fee);
 
     const newApplication = {
       email,
@@ -54,7 +54,7 @@ const VisaDetail = () => {
       visa,
       user,
     };
-    console.log(newApplication);
+    // console.log(newApplication);
 
     fetch("http://localhost:5000/applications", {
       method: "post",
@@ -67,7 +67,7 @@ const VisaDetail = () => {
       .then((data) => {
         document.getElementById("my_modal_5").close();
         if (data.insertedId) {
-          console.log("successfully added");
+          // console.log("successfully added");
           toast.success("successfully added");
         }
       });

@@ -9,7 +9,7 @@ const AllVisasVisa = ({ visa }) => {
   const navigate = useNavigate();
 
   const handleDetails = (_id) => {
-    console.log(_id);
+    // console.log(_id);
     navigate(`/allvisas/${_id}`);
   };
 

@@ -49,7 +49,7 @@ const Addvisas = () => {
       description,
       email,
     };
-    console.log(newVisa);
+    // console.log(newVisa);
 
     // send data to the server and database
     fetch("http://localhost:5000/visas", {
@@ -61,9 +61,9 @@ const Addvisas = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         if (data.insertedId) {
-          console.log("successfully added");
+          // console.log("successfully added");
           Swal.fire({
             title: "Success!",
             text: "Coffee added successfully",
