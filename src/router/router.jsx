@@ -9,6 +9,7 @@ import Addvisas from "../pages/Addvisas";
 import Application from "../pages/Application";
 import Error from "../pages/Error";
 import VisaDetail from "../components/VisaDetail";
+import MyAddedVisa from "../pages/MyAddedVisa";
 
 const router = createBrowserRouter([
   {
@@ -36,8 +37,21 @@ const router = createBrowserRouter([
         element: <Addvisas></Addvisas>,
       },
       {
+        path: "/myAddVisas",
+        element: <MyAddedVisa></MyAddedVisa>,
+      },
+      {
         path: "/application",
         element: <Application></Application>,
+        loader: async () => {
+          const [visas, applications] = await Promise.all([
+            fetch(`http://localhost:5000/visas`).then((res) => res.json()),
+            fetch(`http://localhost:5000/applications`).then((res) =>
+              res.json()
+            ),
+          ]);
+          return { visas, applications };
+        },
       },
       {
         path: "/login",

@@ -24,7 +24,10 @@ const Navbar = () => {
         <NavLink to="/allvisas">All Visas</NavLink>
       </li>
       <li>
-        <NavLink to="/addvisas">My Add Visas</NavLink>
+        <NavLink to="/addvisas">Add Visa</NavLink>
+      </li>
+      <li>
+        <NavLink to="/myAddVisas">My Added Visas</NavLink>
       </li>
       <li>
         <NavLink to="/application">My Application</NavLink>

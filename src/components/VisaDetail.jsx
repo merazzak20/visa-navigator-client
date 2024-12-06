@@ -1,10 +1,23 @@
 import React, { useContext, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const VisaDetail = () => {
   const { user } = useContext(AuthContext);
   const visa = useLoaderData();
+  const {
+    countryImage,
+    countryName,
+    visaType,
+    processingTime,
+    requiredDocuments,
+    ageRestriction,
+    fee,
+    validity,
+    applicationMethod,
+    description,
+  } = visa;
 
   const getCurrentDate = () => {
     const today = new Date();
@@ -22,20 +35,40 @@ const VisaDetail = () => {
 
   const handleApply = (e) => {
     e.preventDefault();
-  };
+    const form = e.target;
 
-  const {
-    countryImage,
-    countryName,
-    visaType,
-    processingTime,
-    requiredDocuments,
-    ageRestriction,
-    fee,
-    validity,
-    applicationMethod,
-    description,
-  } = visa;
+    const email = form.email.value;
+    const fName = form.firstName.value;
+    const lName = form.lastName.value;
+    const date = form.date.value;
+    const fee = form.fee.value;
+    console.log(email, fName, lName, date, fee);
+
+    const newApplication = {
+      email,
+      fName,
+      lName,
+      date,
+      visa,
+      user,
+    };
+    console.log(newApplication);
+
+    fetch("http://localhost:5000/applications", {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(newApplication),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // if (data.insertedId) {
+        //   console.log("successfully added");
+        //   toast.success("successfully added");
+        // }
+      });
+  };
 
   return (
     <div>
@@ -106,6 +139,7 @@ const VisaDetail = () => {
               <input
                 id="email"
                 type="email"
+                name="email"
                 placeholder="email"
                 defaultValue={user?.email}
                 className="input input-bordered w-full"
@@ -120,6 +154,7 @@ const VisaDetail = () => {
               </label>
               <input
                 id="firstName"
+                name="firstName"
                 type="text"
                 placeholder="First Name"
                 className="input input-bordered w-full"
@@ -134,6 +169,7 @@ const VisaDetail = () => {
               </label>
               <input
                 id="lastName"
+                name="lastName"
                 type="text"
                 placeholder="Last Name"
                 className="input input-bordered w-full"
@@ -149,6 +185,7 @@ const VisaDetail = () => {
               <input
                 id="dateInput"
                 type="date"
+                name="date"
                 value={selectedDate}
                 onChange={handleDateChange}
                 className="border rounded px-4 py-2"
@@ -164,6 +201,7 @@ const VisaDetail = () => {
               </label>
               <input
                 id="fee"
+                name="fee"
                 type="text"
                 placeholder="password"
                 defaultValue={fee}
