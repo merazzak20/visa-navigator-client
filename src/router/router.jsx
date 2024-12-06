@@ -20,18 +20,21 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: () => fetch(`http://localhost:5000/visas/limited`),
+        loader: () =>
+          fetch(`https://assignment10-server-two.vercel.app/visas/limited`),
       },
       {
         path: "/allvisas",
         element: <Allvisas></Allvisas>,
-        loader: () => fetch(`http://localhost:5000/visas`),
+        loader: () => fetch(`https://assignment10-server-two.vercel.app/visas`),
       },
       {
         path: "/allvisas/:id",
         element: <VisaDetail></VisaDetail>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/visas/${params.id}`),
+          fetch(
+            `https://assignment10-server-two.vercel.app/visas/${params.id}`
+          ),
       },
       {
         path: "/addvisas",
@@ -48,7 +51,7 @@ const router = createBrowserRouter([
             <MyAddedVisa></MyAddedVisa>
           </PrivateRouter>
         ),
-        loader: () => fetch(`http://localhost:5000/visas`),
+        loader: () => fetch(`https://assignment10-server-two.vercel.app/visas`),
       },
       {
         path: "/application",
@@ -59,14 +62,16 @@ const router = createBrowserRouter([
         ),
         loader: async () => {
           const [visas, applications] = await Promise.all([
-            fetch(`http://localhost:5000/visas`).then((res) => res.json()),
-            fetch(`http://localhost:5000/applications`).then((res) =>
-              res.json()
+            fetch(`https://assignment10-server-two.vercel.app/visas`).then(
+              (res) => res.json()
             ),
+            fetch(
+              `https://assignment10-server-two.vercel.app/applications`
+            ).then((res) => res.json()),
           ]);
           return { visas, applications };
         },
-        // loader: () => fetch("http://localhost:5000/applications"),
+        // loader: () => fetch("https://assignment10-server-two.vercel.app/applications"),
       },
       {
         path: "/login",

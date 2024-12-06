@@ -52,7 +52,7 @@ const Addvisas = () => {
     // console.log(newVisa);
 
     // send data to the server and database
-    fetch("http://localhost:5000/visas", {
+    fetch("https://assignment10-server-two.vercel.app/visas", {
       method: "POST",
       headers: {
         "content-type": "application/json",

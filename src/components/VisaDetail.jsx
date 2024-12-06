@@ -56,7 +56,7 @@ const VisaDetail = () => {
     };
     // console.log(newApplication);
 
-    fetch("http://localhost:5000/applications", {
+    fetch("https://assignment10-server-two.vercel.app/applications", {
       method: "post",
       headers: {
         "content-type": "application/json",

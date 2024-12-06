@@ -30,7 +30,7 @@ const MyVisa = ({ visa }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/visas/${_id}`, {
+        fetch(`https://assignment10-server-two.vercel.app/visas/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -93,7 +93,7 @@ const MyVisa = ({ visa }) => {
     // console.log(updateVisa);
 
     // send data to the server and database
-    fetch(`http://localhost:5000/visas/${_id}`, {
+    fetch(`https://assignment10-server-two.vercel.app/visas/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

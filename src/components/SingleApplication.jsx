@@ -18,9 +18,12 @@ const SingleApplication = ({
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/applications/${_id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://assignment10-server-two.vercel.app/applications/${_id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             // console.log(data);
