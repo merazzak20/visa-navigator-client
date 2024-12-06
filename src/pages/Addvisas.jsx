@@ -3,42 +3,19 @@ import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
 
 const Addvisas = () => {
-  const [formData, setFormData] = useState({
-    requiredDocuments: [],
-  });
+  const [formData, setFormData] = useState([]);
 
-  // const handleChange = (e) => {
-  //   const newvisa = e.target.value;
-  //   if (e.target.checked) {
-  //     setFormData((previsa) => [...previsa, newvisa]);
-  //   } else {
-  //     setFormData((previsa) =>
-  //       previsa.filter((formData) => formData !== newvisa)
-  //     );
-  //   }
-  // };
-
-  const handleChange = (event) => {
-    const { value, checked } = event.target;
-    setFormData((prevData) => {
-      if (checked) {
-        // Add the document if checked
-        return {
-          ...prevData,
-          requiredDocuments: [...prevData.requiredDocuments, value],
-        };
-      } else {
-        // Remove the document if unchecked
-        return {
-          ...prevData,
-          requiredDocuments: prevData.requiredDocuments.filter(
-            (doc) => doc !== value
-          ),
-        };
-      }
-    });
+  const handleChange = (e) => {
+    const newvisa = e.target.value;
+    if (e.target.checked) {
+      setFormData((previsa) => [...previsa, newvisa]);
+    } else {
+      setFormData((previsa) => previsa.filter((visa) => visa !== newvisa));
+    }
   };
-  console.log(formData);
+  // console.log(formData);
+
+  // console.log(formData);
 
   const handleAddVisa = (e) => {
     e.preventDefault();
@@ -47,7 +24,7 @@ const Addvisas = () => {
     const countryName = e.target.countryName.value;
     const visaType = e.target.visaType.value;
     const processingTime = e.target.processingTime.value;
-    const requiredDocuments = e.target.requiredDocuments.value;
+    const requiredDocuments = `${formData}`;
     const ageRestriction = e.target.ageRestriction.value;
     const fee = e.target.fee.value;
     const validity = e.target.validity.value;
