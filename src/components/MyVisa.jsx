@@ -116,7 +116,7 @@ const MyVisa = ({ visa, loadedVisa, setLoadedVisa }) => {
       });
   };
 
-  console.log(_id);
+  // console.log(_id);
 
   return (
     <div className="card bg-base-100  shadow-xl">
