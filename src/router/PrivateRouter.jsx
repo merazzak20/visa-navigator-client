@@ -7,9 +7,6 @@ const PrivateRouter = ({ children }) => {
   const location = useLocation();
   // console.log(location);
 
-  if (user) {
-    return children;
-  }
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -17,6 +14,11 @@ const PrivateRouter = ({ children }) => {
       </div>
     );
   }
+
+  if (user) {
+    return children;
+  }
+
   return <Navigate state={location.pathname} to="/login"></Navigate>;
 };
 

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Fade, Slide } from "react-awesome-reveal";
 
 const AboutSection = () => {
   return (
@@ -9,23 +10,29 @@ const AboutSection = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
             {/* Mission Statement */}
             <div className="max-w-3xl mx-auto  p-8  rounded-lg mb-10 text-justify">
-              <h3 className="text-4xl font-bold text-[#4A00FF] mb-4">
-                About Us
-              </h3>
-              <p className="text-lg text-gray-700">
-                "VisaNavigator is a trusted online platform dedicated to
-                simplifying the global visa application process. We aim to make
-                international travel accessible by providing clear and
-                up-to-date visa information, seamless application processes, and
-                real-time tracking."
-              </p>
-              <p className="text-lg text-gray-700 mt-4">
-                "Behind VisaNavigator is a passionate and experienced team of
-                travel enthusiasts, technology experts, and customer service
-                professionals dedicated to improving the visa application
-                experience. We are constantly evolving and improving to meet the
-                needs of our global users."
-              </p>
+              <Slide>
+                <h3 className="text-4xl font-bold text-[#4A00FF] mb-4">
+                  About Us
+                </h3>
+              </Slide>
+
+              <Fade>
+                <p className="text-lg text-gray-700">
+                  "VisaNavigator is a trusted online platform dedicated to
+                  simplifying the global visa application process. We aim to
+                  make international travel accessible by providing clear and
+                  up-to-date visa information, seamless application processes,
+                  and real-time tracking."
+                </p>
+
+                <p className="text-lg text-gray-700 mt-4">
+                  "Behind VisaNavigator is a passionate and experienced team of
+                  travel enthusiasts, technology experts, and customer service
+                  professionals dedicated to improving the visa application
+                  experience. We are constantly evolving and improving to meet
+                  the needs of our global users."
+                </p>
+              </Fade>
 
               <Link className="btn btn-primary rounded-none mt-4">
                 Read More

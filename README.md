@@ -21,6 +21,8 @@ Let me know if you'd like to tweak it further! 😊
 - **React Toast**
 - **Swiper Js**
 - **React Icons**
+- **React Lottie**
+- **React Awesome reveal**
 
 ## 5 features of this website
 

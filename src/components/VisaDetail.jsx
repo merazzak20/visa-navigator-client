@@ -211,8 +211,8 @@ const VisaDetail = () => {
                 id="fee"
                 name="fee"
                 type="text"
-                placeholder="password"
                 defaultValue={fee}
+                placeholder="Fee"
                 className="input input-bordered w-full"
               />
             </div>

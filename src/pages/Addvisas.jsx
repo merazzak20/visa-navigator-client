@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
 import { AuthContext } from "../provider/AuthProvider";
+import Plane from "../../public/plane.json";
+import Lottie from "lottie-react";
 
 const Addvisas = () => {
   const [formData, setFormData] = useState([]);
@@ -85,6 +87,9 @@ const Addvisas = () => {
       <div className="text-center p-10">
         <h1 className="text-5xl font-bold">Add Visa</h1>
       </div>
+
+      <Lottie className="w-1/3 text-center" animationData={Plane}></Lottie>
+
       <div className="card bg-base-100 w-full shrink-0 shadow-2xl">
         <form onSubmit={handleAddVisa} className="card-body">
           {/* First Row */}

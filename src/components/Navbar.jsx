@@ -30,7 +30,7 @@ const Navbar = () => {
         <NavLink to="/myAddVisas">My Added Visas</NavLink>
       </li>
       <li>
-        <NavLink to="/application">My Application</NavLink>
+        <NavLink to="/application">My Visa Application</NavLink>
       </li>
     </div>
   );
