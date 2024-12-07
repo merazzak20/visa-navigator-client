@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -28,6 +29,10 @@ const AuthProvider = ({ children }) => {
   const userSignIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const passwordReset = (email) => {
+    return sendPasswordResetEmail(auth, email);
   };
 
   const userSignOut = () => {
@@ -55,6 +60,7 @@ const AuthProvider = ({ children }) => {
     createNewUser,
     googleSignIn,
     userSignIn,
+    passwordReset,
     userSignOut,
     updateUserProfile,
   };

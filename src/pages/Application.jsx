@@ -8,6 +8,8 @@ const Application = () => {
   const { user } = useContext(AuthContext);
   const { applications } = useLoaderData();
 
+  // console.log(navigation.state);
+
   // State for search query and filtered applications
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredApplications, setFilteredApplications] = useState([]);

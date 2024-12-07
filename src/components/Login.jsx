@@ -44,6 +44,12 @@ const Login = () => {
       });
   };
 
+  // const handleResetPass = () => {
+  //   const email = document.getElementById("email").value;
+  //   con
+  //   passwordReset(email);
+  // };
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <Helmet>

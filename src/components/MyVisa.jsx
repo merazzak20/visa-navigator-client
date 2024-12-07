@@ -3,8 +3,7 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import Swal from "sweetalert2";
 
-const MyVisa = ({ visa }) => {
-  const [loadedVisa, setLoadedVisa] = useState(visa);
+const MyVisa = ({ visa, loadedVisa, setLoadedVisa }) => {
   const [editableVisa, setEditableVisa] = useState(null);
   const [formData, setFormData] = useState([]);
   const {
@@ -17,7 +16,7 @@ const MyVisa = ({ visa }) => {
     fee,
     validity,
     applicationMethod,
-  } = loadedVisa;
+  } = visa;
   // console.log(loadedVisa);
   const handleDelete = (_id) => {
     Swal.fire({
@@ -43,7 +42,7 @@ const MyVisa = ({ visa }) => {
                 icon: "success",
               });
 
-              // update the loaded coffee state
+              // update the loaded visa state
               const remainingVisa = loadedVisa.filter(
                 (visa) => visa._id !== _id
               );
@@ -102,7 +101,7 @@ const MyVisa = ({ visa }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        document.getElementById("my_modal_5").close();
+        document.getElementById(`id-${_id}`).close();
         // console.log(data);
         if (data.modifiedCount) {
           // console.log("successfully updated");
@@ -116,6 +115,8 @@ const MyVisa = ({ visa }) => {
         }
       });
   };
+
+  console.log(_id);
 
   return (
     <div className="card bg-base-100  shadow-xl">
@@ -153,7 +154,7 @@ const MyVisa = ({ visa }) => {
             <button
               onClick={() => {
                 setEditableVisa(loadedVisa); // Set the selected visa's data
-                document.getElementById("my_modal_5").showModal(); // Open the modal
+                document.getElementById(`id-${_id}`).showModal(); // Open the modal
               }}
               className="btn btn-sm btn-outline btn-primary "
             >
@@ -167,236 +168,239 @@ const MyVisa = ({ visa }) => {
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Modal */}
-      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle ">
-        <div className="modal-box ">
-          <form onSubmit={(e) => handleUpdate(e, _id)} className="space-y-4 ">
-            {/* First Row */}
-            <div className="flex flex-col md:flex-row gap-5 justify-between">
-              <div className="mb-4 w-full">
+        {/* Modal */}
+        <dialog
+          id={`id-${_id}`}
+          className="modal modal-bottom sm:modal-middle "
+        >
+          <div className="modal-box ">
+            <form onSubmit={(e) => handleUpdate(e, _id)} className="space-y-4 ">
+              {/* First Row */}
+              <div className="flex flex-col md:flex-row gap-5 justify-between">
+                <div className="mb-4 w-full">
+                  <label
+                    htmlFor="countryImage"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Country Image
+                  </label>
+                  <input
+                    type="text"
+                    id="countryImage"
+                    name="countryImage"
+                    //   defaultValue={editableVisa?.countryImage}
+                    value={formData.countryImage}
+                    onChange={handleChange}
+                    className="w-full mt-1 p-2 border border-gray-300 rounded"
+                    placeholder="Enter image URL"
+                  />
+                </div>
+
+                <div className="mb-4 w-full">
+                  <label
+                    htmlFor="countryName"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Country Name
+                  </label>
+                  <input
+                    type="text"
+                    id="countryName"
+                    name="countryName"
+                    //   defaultValue={editableVisa?.countryName}
+                    value={formData.countryName}
+                    onChange={handleChange}
+                    className="w-full mt-1 p-2 border border-gray-300 rounded"
+                    //   required
+                    placeholder="Country Name"
+                  />
+                </div>
+              </div>
+
+              {/* Second Row */}
+              <div className="flex flex-col md:flex-row gap-5 justify-between">
+                <div className="mb-4 w-full">
+                  <label
+                    htmlFor="visaType"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Visa Type
+                  </label>
+                  <select
+                    id="visaType"
+                    name="visaType"
+                    //   defaultValue={visaType}
+                    value={formData.visaType}
+                    onChange={handleChange}
+                    className="w-full mt-1 p-2 border border-gray-300 rounded"
+                    required
+                  >
+                    <option value="">Select Visa Type</option>
+                    <option value="Tourist visa">Tourist visa</option>
+                    <option value="Student visa">Student visa</option>
+                    <option value="Official visa">Official visa</option>
+                    {/* Add more options here */}
+                  </select>
+                </div>
+
+                <div className="mb-4 w-full">
+                  <label
+                    htmlFor="processingTime"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Processing Time
+                  </label>
+                  <input
+                    type="text"
+                    id="processingTime"
+                    name="processingTime"
+                    //   defaultValue={processingTime}
+                    value={formData.processingTime}
+                    onChange={handleChange}
+                    className="w-full mt-1 p-2 border border-gray-300 rounded"
+                    placeholder="Processing Time"
+                  />
+                </div>
+              </div>
+
+              {/* 3rd Row */}
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Required Documents
+                </label>
+                <div className="flex space-x-4">
+                  {[
+                    "Valid passport",
+                    "Visa application form",
+                    "Recent passport-sized photograph",
+                  ].map((doc) => (
+                    <div key={doc} className="flex items-center">
+                      <input
+                        type="checkbox"
+                        id={doc}
+                        name="requiredDocuments"
+                        value={doc}
+                        onChange={handleChange}
+                        className="mr-2"
+                      />
+                      <label htmlFor={doc} className="text-sm">
+                        {doc}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 4th Row */}
+              <div className="flex flex-col md:flex-row gap-5 justify-between">
+                <div className="mb-4 w-full">
+                  <label
+                    htmlFor="ageRestriction"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Age Restriction
+                  </label>
+                  <input
+                    type="number"
+                    id="ageRestriction"
+                    name="ageRestriction"
+                    //   defaultValue={ageRestriction}
+                    value={formData.ageRestriction}
+                    onChange={handleChange}
+                    className="w-full mt-1 p-2 border border-gray-300 rounded"
+                    placeholder="Age Restriction"
+                  />
+                </div>
+
+                <div className="mb-4 w-full">
+                  <label
+                    htmlFor="fee"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Fee
+                  </label>
+                  <input
+                    type="number"
+                    id="fee"
+                    name="fee"
+                    // defaultValue={fee}
+                    value={formData.fee}
+                    onChange={handleChange}
+                    className="w-full mt-1 p-2 border border-gray-300 rounded"
+                    placeholder="Fee"
+                  />
+                </div>
+              </div>
+
+              {/* 5th Row */}
+              <div className="flex flex-col md:flex-row gap-5 justify-between">
+                <div className="mb-4 w-full">
+                  <label
+                    htmlFor="validity"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Validity
+                  </label>
+                  <input
+                    type="text"
+                    id="validity"
+                    name="validity"
+                    //   defaultValue={validity}
+                    value={formData.validity}
+                    onChange={handleChange}
+                    className="w-full mt-1 p-2 border border-gray-300 rounded"
+                    placeholder="Validity"
+                  />
+                </div>
+
+                <div className="mb-4 w-full">
+                  <label
+                    htmlFor="applicationMethod"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Application Method
+                  </label>
+                  <input
+                    type="text"
+                    id="applicationMethod"
+                    name="applicationMethod"
+                    defaultValue={applicationMethod}
+                    value={formData.applicationMethod}
+                    onChange={handleChange}
+                    className="w-full mt-1 p-2 border border-gray-300 rounded"
+                    placeholder="Application Method"
+                  />
+                </div>
+              </div>
+
+              <div className="mb-4">
                 <label
-                  htmlFor="countryImage"
+                  htmlFor="description"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Country Image
+                  Description
                 </label>
-                <input
-                  type="text"
-                  id="countryImage"
-                  name="countryImage"
-                  //   defaultValue={editableVisa?.countryImage}
-                  value={formData.countryImage}
+                <textarea
+                  id="description"
+                  name="description"
+                  value={formData.description}
                   onChange={handleChange}
                   className="w-full mt-1 p-2 border border-gray-300 rounded"
-                  placeholder="Enter image URL"
+                  rows="4"
                 />
               </div>
 
-              <div className="mb-4 w-full">
-                <label
-                  htmlFor="countryName"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Country Name
-                </label>
-                <input
-                  type="text"
-                  id="countryName"
-                  name="countryName"
-                  //   defaultValue={editableVisa?.countryName}
-                  value={formData.countryName}
-                  onChange={handleChange}
-                  className="w-full mt-1 p-2 border border-gray-300 rounded"
-                  //   required
-                  placeholder="Country Name"
-                />
-              </div>
-            </div>
-
-            {/* Second Row */}
-            <div className="flex flex-col md:flex-row gap-5 justify-between">
-              <div className="mb-4 w-full">
-                <label
-                  htmlFor="visaType"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Visa Type
-                </label>
-                <select
-                  id="visaType"
-                  name="visaType"
-                  //   defaultValue={visaType}
-                  value={formData.visaType}
-                  onChange={handleChange}
-                  className="w-full mt-1 p-2 border border-gray-300 rounded"
-                  required
-                >
-                  <option value="">Select Visa Type</option>
-                  <option value="Tourist visa">Tourist visa</option>
-                  <option value="Student visa">Student visa</option>
-                  <option value="Official visa">Official visa</option>
-                  {/* Add more options here */}
-                </select>
-              </div>
-
-              <div className="mb-4 w-full">
-                <label
-                  htmlFor="processingTime"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Processing Time
-                </label>
-                <input
-                  type="text"
-                  id="processingTime"
-                  name="processingTime"
-                  //   defaultValue={processingTime}
-                  value={formData.processingTime}
-                  onChange={handleChange}
-                  className="w-full mt-1 p-2 border border-gray-300 rounded"
-                  placeholder="Processing Time"
-                />
-              </div>
-            </div>
-
-            {/* 3rd Row */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Required Documents
-              </label>
-              <div className="flex space-x-4">
-                {[
-                  "Valid passport",
-                  "Visa application form",
-                  "Recent passport-sized photograph",
-                ].map((doc) => (
-                  <div key={doc} className="flex items-center">
-                    <input
-                      type="checkbox"
-                      id={doc}
-                      name="requiredDocuments"
-                      value={doc}
-                      onChange={handleChange}
-                      className="mr-2"
-                    />
-                    <label htmlFor={doc} className="text-sm">
-                      {doc}
-                    </label>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* 4th Row */}
-            <div className="flex flex-col md:flex-row gap-5 justify-between">
-              <div className="mb-4 w-full">
-                <label
-                  htmlFor="ageRestriction"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Age Restriction
-                </label>
-                <input
-                  type="number"
-                  id="ageRestriction"
-                  name="ageRestriction"
-                  //   defaultValue={ageRestriction}
-                  value={formData.ageRestriction}
-                  onChange={handleChange}
-                  className="w-full mt-1 p-2 border border-gray-300 rounded"
-                  placeholder="Age Restriction"
-                />
-              </div>
-
-              <div className="mb-4 w-full">
-                <label
-                  htmlFor="fee"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Fee
-                </label>
-                <input
-                  type="number"
-                  id="fee"
-                  name="fee"
-                  defaultValue={fee}
-                  value={formData.fee}
-                  onChange={handleChange}
-                  className="w-full mt-1 p-2 border border-gray-300 rounded"
-                  placeholder="Fee"
-                />
-              </div>
-            </div>
-
-            {/* 5th Row */}
-            <div className="flex flex-col md:flex-row gap-5 justify-between">
-              <div className="mb-4 w-full">
-                <label
-                  htmlFor="validity"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Validity
-                </label>
-                <input
-                  type="text"
-                  id="validity"
-                  name="validity"
-                  //   defaultValue={validity}
-                  value={formData.validity}
-                  onChange={handleChange}
-                  className="w-full mt-1 p-2 border border-gray-300 rounded"
-                  placeholder="Validity"
-                />
-              </div>
-
-              <div className="mb-4 w-full">
-                <label
-                  htmlFor="applicationMethod"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Application Method
-                </label>
-                <input
-                  type="text"
-                  id="applicationMethod"
-                  name="applicationMethod"
-                  defaultValue={applicationMethod}
-                  value={formData.applicationMethod}
-                  onChange={handleChange}
-                  className="w-full mt-1 p-2 border border-gray-300 rounded"
-                  placeholder="Application Method"
-                />
-              </div>
-            </div>
-
-            <div className="mb-4">
-              <label
-                htmlFor="description"
-                className="block text-sm font-medium text-gray-700"
+              <button
+                type="submit"
+                className="w-full bg-[#4a00ff] text-white py-2 px-4 rounded-none hover:bg-blue-600"
               >
-                Description
-              </label>
-              <textarea
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                className="w-full mt-1 p-2 border border-gray-300 rounded"
-                rows="4"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-[#4a00ff] text-white py-2 px-4 rounded-none hover:bg-blue-600"
-            >
-              Update
-            </button>
-          </form>
-        </div>
-      </dialog>
+                Update
+              </button>
+            </form>
+          </div>
+        </dialog>
+      </div>
     </div>
   );
 };

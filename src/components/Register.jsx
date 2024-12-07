@@ -37,7 +37,7 @@ const Register = () => {
         updateUserProfile({ dispalyName: name, photoURL: photo })
           .then(() => {
             userSignOut();
-            navigate("/login");
+            navigate("/");
           })
           .catch((error) => {
             // console.log(error);
@@ -60,24 +60,6 @@ const Register = () => {
       });
   };
 
-  // const handleGoogleSignIn = () => {
-  //   // console.log(2);
-  //   googleSignIn()
-  //     .then((res) => {
-  //       setUser(res.user);
-  //       // console.log(res.user);
-  //       updateUserProfile({ dispalyName: displayName, photoURL: photoURL })
-  //         .then(() => {
-  //           navigate(location?.state ? location.state : "/");
-  //         })
-  //         .catch((error) => {
-  //           // console.log(error);
-  //         });
-  //     })
-  //     .catch((err) => {
-  //       // console.log(err.message);
-  //     });
-  // };
   return (
     <div className="flex justify-center items-center min-h-screen">
       <Helmet>

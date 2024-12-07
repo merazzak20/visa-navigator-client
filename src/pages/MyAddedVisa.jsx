@@ -8,8 +8,9 @@ const MyAddedVisa = () => {
   const { user } = useContext(AuthContext);
 
   const visas = useLoaderData();
+  const [loadedVisa, setLoadedVisa] = useState(visas);
   // console.log(user.email);
-  const userVisa = visas.filter((visa) => visa.email === user?.email);
+  const userVisa = loadedVisa.filter((visa) => visa.email === user?.email);
 
   return (
     <div>
@@ -20,12 +21,17 @@ const MyAddedVisa = () => {
       </Helmet>
       <div className="text-center p-10">
         <h1 className="text-5xl font-bold">My Added Visa</h1>
-        {/* <p>Number of Visas: {visas.length}</p> */}
+        <p>Number of Visas: {userVisa.length}</p>
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 my-8">
         {userVisa.map((visa) => (
-          <MyVisa key={visa._id} visa={visa}></MyVisa>
+          <MyVisa
+            key={visa._id}
+            visa={visa}
+            loadedVisa={loadedVisa}
+            setLoadedVisa={setLoadedVisa}
+          ></MyVisa>
         ))}
       </div>
     </div>
