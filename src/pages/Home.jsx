@@ -9,44 +9,41 @@ import AboutSection from "../components/AboutSection";
 const Home = () => {
   const visas = useLoaderData();
 
-  const savedTheme = localStorage.getItem("theme") || "light";
-  const [theme, setTheme] = useState(savedTheme);
-
-  // Update the body class based on the theme
-  useEffect(() => {
-    document.body.classList.toggle("dark", theme === "dark");
-    localStorage.setItem("theme", theme); // Save theme in localStorage
-  }, [theme]);
+  const [darkMode, setdarkMode] = useState(false);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    setdarkMode(!darkMode);
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 text-black dark:text-white">
+    <div className={`${darkMode && "dark"}`}>
       <Helmet>
         <title>Home - VisaNavigator</title>
         <meta name="description" content="Learn more about our company." />
         <meta name="keywords" content="about, company, information" />
       </Helmet>
-      <div>
-        {/* Theme toggle button */}
+      {/* Theme toggle button */}
+      <div className="">
         <button
           onClick={toggleTheme}
-          className="p-2 border rounded mb-4 transition-colors"
+          className="p-2 border rounded mb-4 transition-colors dark:text-white dark:bg-black"
         >
-          Toggle Theme
+          {darkMode ? "light" : "dark"}
         </button>
-        <CaruselSlider />
       </div>
-      <div>
-        <AboutSection></AboutSection>
-      </div>
-      <div className="my-5">
-        <VisaSection visas={visas}></VisaSection>
-      </div>
-      <div className="my-7">
-        <FAQ></FAQ>
+      <div className="dark:text-white dark:bg-black">
+        <div className="">
+          <CaruselSlider />
+        </div>
+        <div>
+          <AboutSection darkMode={darkMode}></AboutSection>
+        </div>
+        <div className="my-5">
+          <VisaSection visas={visas}></VisaSection>
+        </div>
+        <div className="my-7">
+          <FAQ></FAQ>
+        </div>
       </div>
     </div>
   );

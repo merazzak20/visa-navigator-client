@@ -22,7 +22,7 @@ Let me know if you'd like to tweak it further! 😊
 - **Swiper Js**
 - **React Icons**
 - **React Lottie**
-- **React Awesome reveal**
+- **React Awesome revealfire**
 
 ## 5 features of this website
 

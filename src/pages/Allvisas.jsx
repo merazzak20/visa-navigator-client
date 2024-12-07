@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import AllVisasVisa from "../components/AllVisasVisa";
-import Plane from "../../public/plane.json";
-import Lottie from "lottie-react";
 
 const Allvisas = () => {
   const allVisa = useLoaderData();
