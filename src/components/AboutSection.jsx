@@ -4,7 +4,7 @@ import { Fade, Slide } from "react-awesome-reveal";
 
 const AboutSection = () => {
   return (
-    <div>
+    <div id="about">
       <section className="py-16 bg-blue-50">
         <div className="container mx-auto px-12 text-center">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">

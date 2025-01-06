@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 a.active {
   border-radius: 0;
   background: #4a00ff !important;

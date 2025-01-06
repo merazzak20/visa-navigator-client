@@ -18,7 +18,7 @@ const HomeLayout = () => {
   }
   return (
     <div>
-      <div className="w-11/12 mx-auto">
+      <div className=" mx-auto sticky top-0 bg-white z-50 shadow-md transition-all duration-300 ">
         <Navbar></Navbar>
       </div>
       <div className="w-11/12 mx-auto">

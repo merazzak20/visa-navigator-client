@@ -5,40 +5,54 @@ import { AuthContext } from "../provider/AuthProvider";
 const Navbar = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { user, userSignOut } = useContext(AuthContext);
+
   const handleSignOut = () => {
     userSignOut()
       .then(() => {
-        // Sign-out successful.
-        // console.log(user);
+        // Sign-out successful
       })
       .catch((error) => {
         toast.error(error.message);
       });
   };
+
   const links = (
-    <div className="flex gap-3">
+    <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/" className="hover:text-primary">
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/allvisas">All Visas</NavLink>
+        <NavLink to="/allvisas" className="hover:text-primary">
+          All Visas
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/addvisas">Add Visa</NavLink>
+        <NavLink to="/addvisas" className="hover:text-primary">
+          Add Visa
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/myAddVisas">My Added Visas</NavLink>
+        <NavLink to="/myAddVisas" className="hover:text-primary">
+          My Added Visas
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/application">My Visa Application</NavLink>
+        <NavLink to="/application" className="hover:text-primary">
+          My Visa Application
+        </NavLink>
       </li>
-    </div>
+    </>
   );
+
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 w-11/12 mx-auto sticky top-0 z-50 shadow-md">
+      {/* Navbar Start */}
       <div className="navbar-start">
+        {/* Mobile Dropdown */}
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -53,68 +67,64 @@ const Navbar = () => {
                 d="M4 6h16M4 12h8m-8 6h16"
               />
             </svg>
-          </div>
+          </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow flex flex-col gap-2"
           >
             {links}
           </ul>
         </div>
-        <a className="text-2xl font-bold text-[#4a00ff]"> VisaNavigator</a>
+        <a className="text-2xl font-bold text-[#4a00ff]">VisaNavigator</a>
       </div>
+
+      {/* Navbar Center */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{links}</ul>
+        <ul className="menu menu-horizontal px-1 space-x-4">{links}</ul>
       </div>
-      <div className="navbar-end space-x-2">
-        <div className=" relative">
-          {user && user?.photoURL ? (
-            <div
-              className="relative group  text-right"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
+
+      {/* Navbar End */}
+      <div className="navbar-end flex items-center space-x-2">
+        {/* User Info and Logout */}
+        {user?.photoURL ? (
+          <div
+            className="relative group"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <img
+              className="w-12 h-12 rounded-full object-cover"
+              src={user.photoURL}
+              alt="User Profile"
+            />
+            {isHovered && (
+              <div className="absolute top-14 left-0 bg-white rounded shadow-md p-2 flex flex-col items-center">
+                <button
+                  onClick={handleSignOut}
+                  className="btn btn-primary rounded-none"
+                >
+                  Logout
+                </button>
+                <p className="text-red-500 mt-2 font-bold">
+                  {user.displayName}
+                </p>
+              </div>
+            )}
+          </div>
+        ) : (
+          // Login & Register Buttons
+          <div className="flex space-x-2">
+            <Link to="/login" className="btn btn-primary rounded-none">
+              Login
+            </Link>
+            <Link
+              to="/register"
+              className="btn btn-outline btn-primary rounded-none"
             >
-              <img
-                className="w-12 h-12 rounded-full object-cover"
-                src={user?.photoURL}
-                alt=""
-              />
-              {/* {user.photoURL} */}
-              {isHovered && (
-                <div className="absolute inset-2  bg-opacity-50 flex flex-col justify-center items-center rounded-full mt-6 -bottom-20 ">
-                  <button
-                    onClick={handleSignOut}
-                    className="btn btn-primary rounded-none"
-                  >
-                    Logout
-                  </button>
-                  <p className="text-red mt-2 font-bold z-20">
-                    {user?.displayName}
-                  </p>
-                </div>
-              )}
-            </div>
-          ) : (
-            ""
-          )}
-        </div>
-        <div>
-          {user ? (
-            ""
-          ) : (
-            <div className=" space-x-2">
-              <Link to="/login" className="btn btn-primary rounded-none">
-                Login
-              </Link>
-              <Link
-                to="/register"
-                className="btn btn-outline btn-primary rounded-none"
-              >
-                Register
-              </Link>
-            </div>
-          )}
-        </div>
+              Register
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );
