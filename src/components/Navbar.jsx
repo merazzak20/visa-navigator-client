@@ -28,6 +28,20 @@ const Navbar = () => {
           All Visas
         </NavLink>
       </li>
+    </>
+  );
+  const privateLinks = (
+    <>
+      <li>
+        <NavLink to="/" className="hover:text-primary">
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/allvisas" className="hover:text-primary">
+          All Visas
+        </NavLink>
+      </li>
       <li>
         <NavLink to="/addvisas" className="hover:text-primary">
           Add Visa
@@ -72,7 +86,7 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box mt-3 w-52 p-2 shadow flex flex-col gap-2"
           >
-            {links}
+            {user ? privateLinks : links}
           </ul>
         </div>
         <a className="text-2xl font-bold text-[#4a00ff]">VisaNavigator</a>
@@ -80,7 +94,9 @@ const Navbar = () => {
 
       {/* Navbar Center */}
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 space-x-4">{links}</ul>
+        <ul className="menu menu-horizontal px-1 space-x-4">
+          {user ? privateLinks : links}
+        </ul>
       </div>
 
       {/* Navbar End */}
@@ -98,7 +114,7 @@ const Navbar = () => {
               alt="User Profile"
             />
             {isHovered && (
-              <div className="absolute top-14 left-0 bg-white rounded shadow-md p-2 flex flex-col items-center">
+              <div className="absolute top-12 -left-4 bg-white rounded shadow-md p-2 flex flex-col items-center">
                 <button
                   onClick={handleSignOut}
                   className="btn btn-primary rounded-none"
