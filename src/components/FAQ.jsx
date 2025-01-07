@@ -2,7 +2,7 @@ import React from "react";
 
 const FAQ = () => {
   return (
-    <div>
+    <div id="faq">
       <h2 className="text-4xl font-bold my-10">FAQ's</h2>
       <div className="join join-vertical w-full">
         <div className="collapse collapse-arrow join-item border-base-300 border">

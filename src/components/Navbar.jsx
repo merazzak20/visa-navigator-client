@@ -24,6 +24,12 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
+        <a href="#about">About</a>
+      </li>
+      <li>
+        <a href="#faq">FAQ</a>
+      </li>
+      <li>
         <NavLink to="/allvisas" className="hover:text-primary">
           All Visas
         </NavLink>
