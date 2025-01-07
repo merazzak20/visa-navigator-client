@@ -83,7 +83,7 @@ const VisaDetail = () => {
       <div>
         <h2 className="text-center text-3xl font-bold my-5">Visa Details</h2>
       </div>
-      <div className="card bg-base-100 w-1/2 mx-auto shadow-xl">
+      <div className="card bg-base-100 md:w-1/2 mx-auto shadow-xl">
         <figure>
           {countryImage && (
             <img className="w-full h-[350px] object-cover" src={countryImage} />
